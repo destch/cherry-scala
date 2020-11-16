@@ -3,7 +3,6 @@
 # ~~~~
 
 GET     /                           controllers.HomeController.index
-GET     /mongo                      controllers.HomeController.mongo
 GET	/getdeal		    controllers.HomeController.getDeal
 GET     /getdeals		    controllers.HomeController.getDeals
 POST    /deletedeal		    controllers.HomeController.deleteDeal

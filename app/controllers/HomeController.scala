@@ -36,15 +36,15 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder:
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def mongo = Action {
+  def getDeals = Action {
     val uri: String = "mongodb+srv://dchavez:daniel97@cluster0.2sezf.mongodb.net/"
     val client: MongoClient = MongoClient(uri)
     val db: MongoDatabase = client.getDatabase("happy_hour")
     val collection: MongoCollection[Document] = db.getCollection("deals")
     val result = collection.find().results()
     var docs = ""
-    for (e <- result) docs += e.toJson
-    val res = "{results: [" + docs + "]}"
+    for (e <- result) docs += e.toJson 
+    val res =  "[" + docs + "]"
     Ok(res)
   }
 
@@ -61,8 +61,6 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder:
     for (e <- result) docs += e.toJson
     Ok(docs)
   }
-
-  def getDeals = Action {Ok("hello")}
 
   def createDeal = Action {Ok("hello")}
 

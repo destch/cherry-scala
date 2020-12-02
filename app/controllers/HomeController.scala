@@ -17,7 +17,6 @@ import play.api.libs.json._
 import controllers.Helpers._
 import org.mongodb.scala.bson._
 
-
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
@@ -37,6 +36,26 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder:
   }
 
   def getDeals = Action {
+    val json: JsValue = Json.parse("""
+  {
+    "name" : "Watership Down",
+    "location" : {
+      "lat" : 51.235685,
+      "long" : -1.309197
+    },
+    "residents" : [ {
+      "name" : "Fiver",
+      "age" : 4,
+      "role" : null
+    }, {
+      "name" : "Bigwig",
+      "age" : 6,
+      "role" : "Owsla"
+    } ]
+  }
+  """)
+    val t = (json \ "location").get
+    println(t)
     val uri: String = "mongodb+srv://dchavez:daniel97@cluster0.2sezf.mongodb.net/"
     val client: MongoClient = MongoClient(uri)
     val db: MongoDatabase = client.getDatabase("happy_hour")
@@ -45,6 +64,7 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder:
     var docs = ""
     for (e <- result) docs += e.toJson 
     val res =  "[" + docs + "]"
+    println(res)
     Ok(res)
   }
 

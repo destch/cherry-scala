@@ -1,4 +1,13 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/danielchavez/Developer/Scala/cherry/cherry/app/controllers/HomeController.scala:57:18: value name is not a member of play.api.libs.json.JsValue[0m
-[0m[[0m[31merror[0m] [0m[0m    println(json.name)[0m
-[0m[[0m[31merror[0m] [0m[0m                 ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/danielchavez/Developer/Scala/cherry/cherry/app/controllers/HomeController.scala:17:20: object Helpers is not a member of package controllers[0m
+[0m[[0m[31merror[0m] [0m[0mimport controllers.Helpers._[0m
+[0m[[0m[31merror[0m] [0m[0m                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/danielchavez/Developer/Scala/cherry/cherry/app/controllers/HomeController.scala:44:36: value results is not a member of org.mongodb.scala.FindObservable[org.mongodb.scala.bson.Document][0m
+[0m[[0m[31merror[0m] [0m[0m    var result = collection.find().results()[0m
+[0m[[0m[31merror[0m] [0m[0m                                   ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/danielchavez/Developer/Scala/cherry/cherry/app/controllers/HomeController.scala:57:33: value printHeadResult is not a member of org.mongodb.scala.SingleObservable[org.mongodb.scala.bson.Document][0m
+[0m[[0m[31merror[0m] [0m[0m    println(coll.find().first().printHeadResult())[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/danielchavez/Developer/Scala/cherry/cherry/app/controllers/HomeController.scala:69:63: value results is not a member of org.mongodb.scala.SingleObservable[org.mongodb.scala.bson.Document][0m
+[0m[[0m[31merror[0m] [0m[0m    val result = collection.find(equal("_id", query)).first().results()[0m
+[0m[[0m[31merror[0m] [0m[0m                                                              ^[0m
+[0m[[0m[31merror[0m] [0m[0mfour errors found[0m

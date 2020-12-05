@@ -36,31 +36,12 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder:
   }
 
   def getDeals = Action {
-    val json: JsValue = Json.parse("""
-  {
-    "name" : "Watership Down",
-    "location" : {
-      "lat" : 51.235685,
-      "long" : -1.309197
-    },
-    "residents" : [ {
-      "name" : "Fiver",
-      "age" : 4,
-      "role" : null
-    }, {
-      "name" : "Bigwig",
-      "age" : 6,
-      "role" : "Owsla"
-    } ]
-  }
-  """)
-    val t = (json \ "location").get
-    println(t)
     val uri: String = "mongodb+srv://dchavez:daniel97@cluster0.2sezf.mongodb.net/"
     val client: MongoClient = MongoClient(uri)
-    val db: MongoDatabase = client.getDatabase("happy_hour")
-    val collection: MongoCollection[Document] = db.getCollection("deals")
-    val result = collection.find().results()
+    val db: MongoDatabase = client.getDatabase("sample_airbnb")
+    val collection: MongoCollection[Document] = db.getCollection("listingsAngReviews")
+    /*collection.find().results().foreach(res => println(res.toJson))*/
+    var result = collection.find().results()
     var docs = ""
     for (e <- result) docs += e.toJson 
     val res =  "[" + docs + "]"

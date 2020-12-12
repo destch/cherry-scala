@@ -5,6 +5,7 @@ import javax.inject._
 import play.api.mvc._
 
 import scala.collection.immutable.IndexedSeq
+import scala.collection.mutable.ArrayBuffer
 
 import org.mongodb.scala._
 import org.mongodb.scala.model.Aggregates._
@@ -34,32 +35,21 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder:
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def getDeals2 = Action {
-    val uri: String = "mongodb+srv://dchavez:daniel97@cluster0.2sezf.mongodb.net/"
-    val client: MongoClient = MongoClient(uri)
-    val db: MongoDatabase = client.getDatabase("sample_airbnb")
-    val collection: MongoCollection[Document] = db.getCollection("listingsAngReviews")
-    /*collection.find().results().foreach(res => println(res.toJson))*/
-    var result = collection.find().results()
-    var docs = ""
-    for (e <- result) docs += e.toJson 
-    val res =  "[" + docs + "]"
-    println(res)
-    Ok(res)
-  }
-
   def getDeals = Action {
     val uri: String = "mongodb+srv://dchavez:daniel97@cluster0.2sezf.mongodb.net/"
     val client: MongoClient = MongoClient(uri)
     val db: MongoDatabase = client.getDatabase("happy_hour")
-    val coll: MongoCollection[Document] = db.getCollection("deals")
-    println(coll.find().first().printHeadResult())
-    Ok("hello")
+    val collection: MongoCollection[Document] = db.getCollection("deals")
+    var result = collection.find().results()
+    var docs = ArrayBuffer[String]()
+    for (e <- result) docs += e.toJson 
+    val res =  "{\"results\":[" + docs.mkString(", ") + "]}"
+    Ok(res)
   }
+
 
   def getDeal = Action {implicit request =>
     val requestID = request.getQueryString("id").getOrElse("None")
-    println(requestID)
     val uri: String = "mongodb+srv://dchavez:daniel97@cluster0.2sezf.mongodb.net/"
     val client: MongoClient = MongoClient(uri)
     val db: MongoDatabase = client.getDatabase("happy_hour")
@@ -71,7 +61,22 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder:
     Ok(docs)
   }
 
-  def createDeal = Action {Ok("hello")}
+  def createDeal = Action { request =>
+    val uri: String = "mongodb+srv://dchavez:daniel97@cluster0.2sezf.mongodb.net/"
+    val client: MongoClient = MongoClient(uri)
+    val db: MongoDatabase = client.getDatabase("happy_hour")
+    val collection: MongoCollection[Document] = db.getCollection("deals")
+    val json = request.body.asJson.get
+    val dealLoc = json \ "dealLoc"
+    val dealPrice = json \ "dealPrice"
+    val dealItems0 = json \ "dealItems"
+    val dealItems = dealItems0.as[Map[String, Boolean]]
+    val doc: Document = Document("dealLoc" -> dealLoc.as[String],
+                                 "dealPrice" -> dealPrice.as[Double],
+                                 "dealItems" -> Document("beer" -> dealItems.get("beer"), "shot" -> dealItems.get("shot"), "cocktail" -> dealItems.get("cocktail")))
+    collection.insertOne(doc).results()
+    Ok("hello")
+  }
 
   def deleteDeal = Action {Ok("hello")}
 

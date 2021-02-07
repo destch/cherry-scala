@@ -17,23 +17,10 @@ import org.mongodb.scala.model._
 import play.api.libs.json._
 import controllers.Helpers._
 
-/**
- * This controller creates an `Action` to handle HTTP requests to the
- * application's home page.
- */
+
 @Singleton
 class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder: AssetsFinder)
   extends AbstractController(cc) {
-
-  /**
-   * Create an Action to render an HTML page with a welcome message.
-   * The configuration in the `routes` file means that this method
-   * will be called when the application receives a `GET` request with
-   * a path of `/`.
-   */
-  def index = Action {
-    Ok(views.html.index("Your new application is ready."))
-  }
 
   def getDeals = Action {
     val uri: String = "mongodb+srv://dchavez:daniel97@cluster0.2sezf.mongodb.net/"
@@ -45,6 +32,15 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder:
     for (e <- result) docs += e.toJson 
     val res =  "{\"results\":[" + docs.mkString(", ") + "]}"
     Ok(res)
+  }
+
+
+  def getDealTest = Action {implicit request =>
+    val dealId = request.getQueryString("id").getOrElse(null)
+    //learn how to handle an error in the request
+      dealService.getDealDetails(dealId)
+      .map(dealDetails => Json.toJson(dealDetails))
+      .map(Ok(_))
   }
 
 
@@ -71,11 +67,14 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder:
     val dealPrice = json \ "dealPrice"
     val dealItems0 = json \ "dealItems"
     val dealItems = dealItems0.as[Map[String, Boolean]]
+    val dealDays0 = json \ "dealDays"
+    val dealDays = dealDays0.as[Map[String, Boolean]]
     val doc: Document = Document("dealLoc" -> dealLoc.as[String],
                                  "dealPrice" -> dealPrice.as[Double],
-                                 "dealItems" -> Document("beer" -> dealItems.get("beer"), "shot" -> dealItems.get("shot"), "cocktail" -> dealItems.get("cocktail")))
+                                 "dealItems" -> Document("beer" -> dealItems.get("beer"), "shot" -> dealItems.get("shot"), "cocktail" -> dealItems.get("cocktail")),
+                                 "dealDays" -> Document("M" -> dealDays.get("M"), "T" -> dealDays.get("T"), "W" -> dealDays.get("W"), "R" -> dealDays.get("R"), "F" -> dealDays.get("F"), "Sa" -> dealDays.get("Sa"), "Su" -> dealDays.get("Su")))
     collection.insertOne(doc).results()
-    Ok("hello")
+    Ok("inserted")
   }
 
   def deleteDeal = Action {Ok("hello")}

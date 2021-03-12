@@ -35,7 +35,7 @@ class DealRepo {
 	   	  .results()
 	  }
 
-	def ListFilter(filter): Seq[Deal] = {
+	def ListFilter(): Seq[Deal] = {
 		val now = Calendar.getInstance.getTime
 		val dowInt = new SimpleDateFormat("u")
 		val dayNum = dowInt.format(now)

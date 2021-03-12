@@ -1,15 +1,22 @@
 package deals.services
 
+import javax.inject._
 import deals.models._
-import deals.repositories.UserRepo
+import deals.repositories.DealRepo
+import scala.concurrent.ExecutionContext
+import org.mongodb.scala._
 
-private[deals] class DealService(dealRepo: DealRepo,
-                                 implicit private val ec: ExecutionContext) {
+class DealService @Inject() (dealRepo: DealRepo) {
+  def getDealDetails(dealId: String): Seq[Deal] = {
+    dealRepo.Get(dealId)
+  }
 
-  def getDealDetails(dealId: Long): Maybe[DealDetails] = {
-    require(dealId != null)
+  def getDeals(): Seq[Deal] = {
+    dealRepo.List()
+  }
 
-    dealRepo.findById(dealId)
-      .map(DealDetails(_))
+  def getCurrentDeals(): Seq[Deal] = {
+    dealRepo.ListFilter()
   }
 }
+

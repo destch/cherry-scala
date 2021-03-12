@@ -16,45 +16,29 @@ import org.mongodb.scala.model.Updates._
 import org.mongodb.scala.model._
 import play.api.libs.json._
 import controllers.Helpers._
-
+import deals.services.DealService
+import deals.models.Deal
 
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder: AssetsFinder)
+class HomeController @Inject()(cc: ControllerComponents,  dealService: DealService) (implicit assetsFinder: AssetsFinder)
   extends AbstractController(cc) {
 
   def getDeals = Action {
-    val uri: String = "mongodb+srv://dchavez:daniel97@cluster0.2sezf.mongodb.net/"
-    val client: MongoClient = MongoClient(uri)
-    val db: MongoDatabase = client.getDatabase("happy_hour")
-    val collection: MongoCollection[Document] = db.getCollection("deals")
-    var result = collection.find().results()
-    var docs = ArrayBuffer[String]()
-    for (e <- result) docs += e.toJson 
-    val res =  "{\"results\":[" + docs.mkString(", ") + "]}"
-    Ok(res)
+    val results: Seq[Deal] = dealService.getDeals()
+    val result: JsValue = Json.toJson(results)
+    Ok(result)
   }
 
-
-  def getDealTest = Action {implicit request =>
-    val dealId = request.getQueryString("id").getOrElse(null)
-    //learn how to handle an error in the request
-      dealService.getDealDetails(dealId)
-      .map(dealDetails => Json.toJson(dealDetails))
-      .map(Ok(_))
+    def getCurrentDeals = Action {
+    val results: Seq[Deal] = dealService.getCurrentDeals()
+    val result: JsValue = Json.toJson(results)
+    Ok(result)
   }
 
-
-  def getDeal = Action {implicit request =>
-    val requestID = request.getQueryString("id").getOrElse("None")
-    val uri: String = "mongodb+srv://dchavez:daniel97@cluster0.2sezf.mongodb.net/"
-    val client: MongoClient = MongoClient(uri)
-    val db: MongoDatabase = client.getDatabase("happy_hour")
-    val collection: MongoCollection[Document] = db.getCollection("deals")
-    val query = requestID
-    val result = collection.find(equal("_id", query)).first().results()
-    var docs = ""
-    for (e <- result) docs += e.toJson
-    Ok(docs)
+  def getDeal(id: String) = Action {implicit request =>
+    val results: Seq[Deal] = dealService.getDealDetails(id)
+    val result: JsValue = Json.toJson(results)
+    Ok(result)
   }
 
   def createDeal = Action { request =>
@@ -82,3 +66,5 @@ class HomeController @Inject()(cc: ControllerComponents) (implicit assetsFinder:
   def updateDeal = Action {Ok("hello")}
 
 }
+
+

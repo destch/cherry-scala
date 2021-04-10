@@ -1,4 +1,4 @@
 [0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
-[0m[[0m[0mdebug[0m] [0m[0m	(/Users/danielchavez/Developer/Scala/cherry/cherry/conf/logback.xml,/Users/danielchavez/Developer/Scala/cherry/cherry/target/scala-2.13/classes/logback.xml)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(/Users/danielchavez/Developer/Scala/cherry/cherry/conf/application.conf,/Users/danielchavez/Developer/Scala/cherry/cherry/target/scala-2.13/classes/application.conf)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(/Users/danielchavez/Developer/Scala/cherry/cherry/conf/routes,/Users/danielchavez/Developer/Scala/cherry/cherry/target/scala-2.13/classes/routes)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/home/ec2-user/cherry-scala/conf/logback.xml,/home/ec2-user/cherry-scala/target/scala-2.13/classes/logback.xml)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/home/ec2-user/cherry-scala/conf/routes,/home/ec2-user/cherry-scala/target/scala-2.13/classes/routes)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/home/ec2-user/cherry-scala/conf/application.conf,/home/ec2-user/cherry-scala/target/scala-2.13/classes/application.conf)[0m

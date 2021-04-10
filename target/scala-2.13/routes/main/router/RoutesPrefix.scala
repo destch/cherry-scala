@@ -1,6 +1,6 @@
 // @GENERATOR:play-routes-compiler
-// @SOURCE:/Users/danielchavez/Developer/Scala/cherry/cherry/conf/routes
-// @DATE:Thu Mar 11 17:35:15 EST 2021
+// @SOURCE:/home/ec2-user/cherry-scala/conf/routes
+// @DATE:Fri Mar 12 20:48:33 UTC 2021
 
 
 package router {

@@ -11,7 +11,7 @@ import play.api.libs.json._
 case class Deal(_id: ObjectId, dealLoc: Option[String],dealAddr: Option[String], dealLocOpen: Option[Map[String, Double]], dealLocClose: Option[Map[String, Double]],
  dealItems: Option[Map[String, Double]], dealDesc: Option[String], dealPrice: Option[Double],
  dealRatings: Option[Double], dealRating: Option[String], dealComments: Option[String],
-dealVerif: Option[Double], dealDays: Option[Map[String, Double]], dealStart: Option[Map[String, Double]], dealEnd: Option[Map[String, Double]], dealThumb: Option[String])
+dealVerif: Option[Double], dealDays: Option[Map[String, Double]], dealStart: Option[Map[String, Double]], dealEnd: Option[Map[String, Double]], dealThumb: Option[String], dealLocCoords: Option[Map[String,Double]])
 
 object Deal {
 

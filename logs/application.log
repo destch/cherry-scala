@@ -1,10 +1,14 @@
-2021-04-10 10:35:00,025 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-5 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2021-04-18 15:05:06,978 [INFO] from play.api.http.EnabledFilters in pool-10-thread-2 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     play.filters.csrf.CSRFFilter
     play.filters.headers.SecurityHeadersFilter
     play.filters.hosts.AllowedHostsFilter
 
-2021-04-10 10:35:00,188 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-5 - Application started (Dev) (no global state)
-2021-04-10 10:43:42,130 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-shutdown-hook-1 - Stopping Akka HTTP server...
-2021-04-10 10:43:42,138 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-15 - Terminating server binding for /[0:0:0:0:0:0:0:0]:9000
-2021-04-10 10:43:42,168 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-19 - Running provided shutdown stop hooks
+2021-04-18 15:05:07,289 [INFO] from play.api.Play in pool-10-thread-2 - Application started (Dev) (no global state)
+2021-04-18 15:05:07,298 [WARN] from play.core.server.ssl.DefaultSSLEngineProvider in pool-10-thread-2 - Using generated key with self signed certificate for HTTPS. This should NOT be used in production.
+2021-04-18 15:05:07,361 [INFO] from play.core.server.AkkaHttpServer in pool-10-thread-2 - Listening for HTTP on /0:0:0:0:0:0:0:0:9000
+2021-04-18 15:05:07,367 [INFO] from play.core.server.AkkaHttpServer in pool-10-thread-2 - Listening for HTTPS on /0:0:0:0:0:0:0:0:9001
+2021-04-18 17:05:21,392 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-shutdown-hook-1 - Stopping Akka HTTP server...
+2021-04-18 17:05:21,608 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-66 - Terminating server binding for /0:0:0:0:0:0:0:0:9000
+2021-04-18 17:05:21,816 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.default-dispatcher-69 - Terminating server binding for /0:0:0:0:0:0:0:0:9001
+2021-04-18 17:05:21,932 [INFO] from play.core.server.AkkaHttpServer in play-dev-mode-akka.actor.internal-dispatcher-68 - Running provided shutdown stop hooks
